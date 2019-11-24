@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- STYLESHEET -->
+      <link rel="stylesheet" type="text/css" href="./static/css/main.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <!-- JAVSCRIPT -->
+      <script src="./static/js/main.js"></script>
+   </head>
+   <body>
+      <div class="content">
+         <h1 class="title"> Who's the Artist? </h1>
+         <form id="form" action = "http://localhost:5000/" method = "POST"
+               enctype = "multipart/form-data">
+         <div class="image-box center">
+            {% if prediction == None %}
+            <!-- Show upload buttons if there is no prediction results yet. -->
+               <img id="upload-img" class="center"
+                    src="./static/img/upload.png" width="100">
+               <label for="file-upload" class="center custom-button">
+                  <i class="fa fa-upload"></i> upload a painting
+                  <input type="file" id="file-upload" name="image" onchange=submit() />
+               </label>
+            {% else %}
+            <!-- Show prediction results. -->
+               <p class="result"> The convolutional neural network predicts that the painter is <b>{{ prediction }}</b>. </p>
+               <br>
+               {% if prediction == "Vincent van Gogh" %}
+                  <img id="upload-img" class="center"
+                             src="./static/img/Vincent_van_Gogh.jpg" width="250">
+                  <br>
+                  <p text-align="left"> Vincent Willem van Gogh (30 March 1853 – 29 July 1890) was a Dutch post-impressionist painter who is among the most famous and influential figures in the history of Western art. In just over a decade he created about 2,100 artworks, including around 860 oil paintings, most of which date from the last two years of his life. They include landscapes, still lifes, portraits and self-portraits, and are characterised by bold colours and dramatic, impulsive and expressive brushwork that contributed to the foundations of modern art. He was not commercially successful, and his suicide at 37 came after years of mental illness and poverty. </p>
+               {% endif %}
+               {% if prediction == "Edgar Degas" %}
+                  <img id="upload-img" class="center"
+                             src="./static/img/Edgar_Degas.jpg" width="250">
+                  <br>
+                  <p text-align="left"> Edgar Degas (born Hilaire-Germain-Edgar De Gas; 19 July 1834 – 27 September 1917) was a French artist famous for his paintings, sculptures, prints, and drawings. He is especially identified with the subject of dance; more than half of his works depict dancers. Regarded as one of the founders of Impressionism, he rejected the term, preferring to be called a realist. He was a superb draftsman, and particularly masterly in depicting movement, as can be seen in his rendition of dancers, racecourse subjects and female nudes. His portraits are notable for their psychological complexity and for their portrayal of human isolation. </p>
+               {% endif %}
+               {% if prediction == "Pablo Picasso" %}
+                  <img id="upload-img" class="center"
+                             src="./static/img/Pablo_Picasso.jpg" width="250">
+                  <br>
+                  <p text-align="left"> Pablo Ruiz Picasso (25 October 1881 – 8 April 1973) was a Spanish painter, sculptor, printmaker, ceramicist, stage designer, poet and playwright who spent most of his adult life in France. Regarded as one of the most influential artists of the 20th century, he is known for co-founding the Cubist movement, the invention of constructed sculpture,[6][7] the co-invention of collage, and for the wide variety of styles that he helped develop and explore. Among his most famous works are the proto-Cubist Les Demoiselles d'Avignon (1907), and Guernica (1937), a dramatic portrayal of the bombing of Guernica by the German and Italian airforces during the Spanish Civil War. </p>
+               {% endif %}
+               {% if prediction == "Pierre-Auguste Renoir" %}
+                  <img id="upload-img" class="center"
+                             src="./static/img/Pierre_Auguste_Renoir.jpg" width="250">
+                  <br>
+                  <p text-align="left"> Pierre-Auguste Renoir, commonly known as Auguste Renoir (25 February 1841 – 3 December 1919), was a French artist who was a leading painter in the development of the Impressionist style. As a celebrator of beauty and especially feminine sensuality, it has been said that "Renoir is the final representative of a tradition which runs directly from Rubens to Watteau." </p>
+               {% endif %}
+            {% endif %}
+         </div>
+            {% if prediction != None %}
+            <!-- Show upload button for follow up predictions. -->
+               <label for="file-upload" class="center custom-button">
+                  <i class="fa fa-upload"></i> upload another painting
+                  <input type="file" id="file-upload" name="image" onchange=submit() />
+               </label>
+            {% endif %}
+         </form>
+      </div>
+   </body>
+</html>
